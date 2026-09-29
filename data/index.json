@@ -1,0 +1,38 @@
+{
+ "as_of": null,
+ "license": {
+  "name": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0/",
+  "credit": "The Counter",
+  "site": "https://counterdecides.github.io/",
+  "notice": "Picks, results and grades by The Counter (https://counterdecides.github.io/), under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Reuse them for any purpose with credit to The Counter."
+ },
+ "fields": [
+  "league",
+  "season",
+  "week",
+  "game_id",
+  "kickoff",
+  "home",
+  "away",
+  "neutral",
+  "home_win_prob",
+  "margin",
+  "version",
+  "sealed_at",
+  "call",
+  "call_pct",
+  "status",
+  "home_score",
+  "away_score",
+  "winner",
+  "called_right",
+  "brier",
+  "log_loss",
+  "one_source",
+  "seal_hash",
+  "sealed_post",
+  "graded_post"
+ ],
+ "leagues": {}
+}

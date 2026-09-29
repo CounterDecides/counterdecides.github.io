@@ -1,0 +1,178 @@
+/* The Counter: one stylesheet for every page. The MATRIX tokens (Tom, Sep 28, 2026: carbon, off-white, grays and
+   one electric green) are written in by site/build_site.py from branding/src/brand.py; no other color appears here.
+   Dark only. Ration the green: it colors the pick percents (.pct), the bar fills (.fill, the brand mark's too) and
+   link focus, and nothing else. Headlines and names are off-white, labels gray, rules the gray track or the dim
+   rule. Mobile first: phones get the base rules, wider screens the media query at the end. */
+:root{color-scheme:dark;--bg:#07080b;--raised:#111318;--ink:#ededed;--ink2:#b8bcc2;--muted:#8a8f98;--grid:#15181d;--rule:#2a2e35;--track:#5c626b;--accent:#22e36b;--neg:#b8bcc2}
+@font-face{font-family:"Montserrat";src:url("fonts/Montserrat-Medium.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Montserrat";src:url("fonts/Montserrat-SemiBold.woff") format("woff");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Montserrat";src:url("fonts/Montserrat-ExtraBold.woff") format("woff");font-weight:800;font-style:normal;font-display:swap}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:500;font-size:17px;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+a{color:inherit;text-decoration-thickness:2px;text-underline-offset:4px}
+a:hover{text-decoration-thickness:3px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--bg);padding:10px 14px;font-weight:800;z-index:10}
+.skip:focus{top:12px}
+
+/* the preview band: only on the owner's local preview, never on the public site */
+.preview-band{background:var(--ink);color:var(--bg);font-weight:800;text-align:center;padding:10px 16px;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+
+/* the masthead */
+.masthead{padding:34px 0 8px}
+.brand{display:inline-flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--ink)}
+.wordmark{display:block;font-weight:800;font-size:clamp(40px,12.4vw,76px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase;margin:0}
+.mark{display:block;position:relative;height:12px;border-radius:3px;background:var(--track);overflow:hidden}
+.slogan{margin:16px 0 0;font-weight:600;font-size:clamp(18px,4.8vw,22px);line-height:1.35;color:var(--ink2)}
+.topbar{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
+.topbar .brand{flex-direction:row;align-items:center;gap:12px}
+.topbar .wordmark{font-size:22px;line-height:1;letter-spacing:0}
+.topbar .mark{width:44px;height:10px;border-radius:3px}
+
+
+/* bars: the pick's percent, and the brand mark: the green fill on the gray track, squared-off ends. They fill once
+   on load. */
+.meter{position:relative;height:8px;border-radius:2px;background:var(--track);overflow:hidden}
+.meter::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--bg)}
+.fill{display:block;height:100%;width:var(--p,62%);background:var(--accent);border-radius:inherit;transform-origin:left center;animation:fill .9s cubic-bezier(.2,.75,.2,1) both;animation-delay:calc(var(--i,0) * 60ms + 150ms)}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* a league's week */
+.week{padding:38px 0 8px}
+.head{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;margin:0 0 6px;font-weight:800;font-size:clamp(30px,8.4vw,46px);line-height:1.05;letter-spacing:-.015em}
+.chip{display:inline-block;border:1px solid var(--track);color:var(--ink2);font-size:.46em;letter-spacing:.08em;padding:.42em .62em .36em;border-radius:3px;line-height:1}
+.picks{list-style:none;margin:14px 0 0;padding:0;border-bottom:1px solid var(--track)}
+.pick{padding:20px 0 22px;border-top:1px solid var(--rule)}
+.pick:first-child{border-top:1px solid var(--track)}
+.pick-line{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:0 0 12px}
+.team{font-weight:800;font-size:clamp(25px,7.2vw,38px);line-height:1.02;text-transform:uppercase;letter-spacing:-.01em;overflow-wrap:anywhere}
+.pct{color:var(--accent);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pick-line .pct{font-size:clamp(38px,11vw,60px);line-height:.85;letter-spacing:-.02em}
+.pick-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;margin:12px 0 0;font-weight:600;font-size:16px;color:var(--ink2)}
+.when{color:var(--muted)}
+.result{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--ink)}
+.result.quiet{color:var(--muted);font-weight:600}
+/* the marks tell hit from miss by shape and fill, never by color alone: a hit is an off-white disc with a carbon
+   check, a miss a light gray ring with a light gray cross, a tie a gray ring with an equals sign. No green. */
+.mk{width:22px;height:22px;flex:none}
+.mk circle{fill:none;stroke-width:2}
+.mk path{fill:none;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.mk.hit circle{fill:var(--ink);stroke:var(--ink)}
+.mk.hit path{stroke:var(--bg)}
+.mk.miss circle,.mk.miss path{stroke:var(--neg)}
+.mk.tie circle,.mk.tie path{stroke:var(--muted)}
+
+/* the record */
+.record{padding:44px 0 10px}
+.section-title{margin:0 0 18px;font-weight:800;font-size:clamp(30px,8.4vw,46px);line-height:1.05;letter-spacing:-.015em}
+.league{border-top:1px solid var(--track);padding:18px 0 6px}
+.league-name{margin:0;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.big{margin:6px 0 0;font-weight:800;font-size:clamp(64px,19vw,112px);line-height:.95;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.big .of{font-size:.42em;letter-spacing:0;color:var(--ink2);margin:0 .12em}
+.big-label{margin:6px 0 0;font-weight:800;font-size:18px;color:var(--ink2)}
+.lines{list-style:none;margin:18px 0 0;padding:0}
+.lines li{padding:12px 0;border-top:1px solid var(--rule);font-weight:600;font-size:18px}
+.lines li.wkline{font-weight:800}
+.lines b{font-weight:800}
+.lines li,.first-line,.empty{text-wrap:pretty}
+.lines .pct{font-size:1em}
+.empty{margin:14px 0 0;font-weight:800;font-size:clamp(22px,6vw,30px);line-height:1.2}
+.more{display:inline-block;margin:22px 0 0;font-weight:800;font-size:18px}
+
+
+/* follow */
+.follow{padding:40px 0 8px}
+.buttons{display:flex;flex-direction:column;gap:12px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:58px;padding:14px 22px;border:2px solid var(--ink);border-radius:4px;background:var(--ink);color:var(--bg);font-weight:800;font-size:19px;text-decoration:none;letter-spacing:.01em}
+.btn:hover{background:var(--ink2);border-color:var(--ink2)}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--track)}
+.btn.alt:hover{background:var(--raised);border-color:var(--ink)}
+
+/* the book slot (renders only when site/site.json has a book_url) */
+.book{padding:30px 0 0}
+.book .wrap>div{border-top:1px solid var(--track);padding-top:16px}
+.book h2{margin:0 0 10px;font-weight:800;font-size:26px}
+
+/* the empty state: the news in a band (a raised carbon panel, off-white type) */
+.first{background:var(--raised);color:var(--ink);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:40px 0 0;padding:44px 0 48px}
+.first-line{margin:0;font-weight:800;font-size:clamp(32px,9.4vw,58px);line-height:1.05;letter-spacing:-.02em;max-width:14em}
+
+/* inner pages */
+.page{padding:30px 0 10px}
+.page h1{margin:0 0 14px;font-weight:800;font-size:clamp(38px,11vw,64px);line-height:1;letter-spacing:-.025em}
+.page h2{margin:34px 0 10px;font-weight:800;font-size:24px;line-height:1.2}
+.page p,.page li{max-width:40em}
+.prose ul{padding-left:1.2em}
+.prose li{margin:6px 0}
+.prose a{overflow-wrap:anywhere}
+.intro{font-weight:600;font-size:19px;color:var(--ink2)}
+
+/* the data page's "How it works": Tom's description of the engine, then one plain line in gray */
+.how{margin:0 0 8px}
+.how h2{margin-top:26px}
+.how p{color:var(--ink2);font-weight:600}
+.how .how-note{color:var(--muted);font-weight:500;font-size:16px}
+
+/* the record page */
+.season{padding:26px 0 0}
+.season .league{padding-bottom:10px}
+.page .league-name{margin:0;font-size:20px;line-height:1.2}
+.market{margin:14px 0 0;font-weight:800;font-size:18px}
+.wk{margin:34px 0 0}
+.wk-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 16px;border-bottom:1px solid var(--track);padding-bottom:8px}
+.wk-head h3{margin:0;font-weight:800;font-size:26px;line-height:1.1}
+.wk-rec{font-weight:800;font-size:20px;font-variant-numeric:tabular-nums}
+.wk-links{display:flex;flex-wrap:wrap;gap:6px 20px;margin:10px 0 0;font-weight:800;font-size:16px}
+.games{list-style:none;margin:6px 0 0;padding:0}
+.game{display:grid;grid-template-columns:30px 1fr;gap:2px 10px;padding:14px 0;border-bottom:1px solid var(--rule);align-items:start}
+.game .mk,.game .dot{grid-row:span 2;margin-top:3px}
+.dot{display:block;width:22px;height:22px;border-radius:50%;border:2px solid var(--track)}
+.game-pick{font-weight:800;font-size:20px;line-height:1.2}
+.game-pick .t{text-transform:uppercase}
+.game-meta{display:flex;flex-wrap:wrap;gap:2px 14px;font-weight:600;font-size:15px;color:var(--ink2)}
+.game-meta .r{color:var(--ink);font-weight:800}
+.game-meta .r.quiet{color:var(--muted);font-weight:600}
+
+/* the data page */
+.files{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--track)}
+.files li{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;padding:12px 0;border-bottom:1px solid var(--rule);font-weight:600}
+.files .links a{margin-left:14px;font-weight:800}
+.files .links a:first-child{margin-left:0}
+
+/* the footer */
+.foot{margin:56px 0 0;padding:26px 0 40px;border-top:1px solid var(--track)}
+.foot .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px}
+.foot-name{margin:0;font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:.02em}
+.foot nav{display:flex;gap:22px;font-weight:800}
+
+@media (min-width:720px){
+  body{font-size:18px}
+  .wrap{padding:0 32px}
+  .masthead{padding:52px 0 10px}
+  .buttons{flex-direction:row;max-width:760px}
+  .btn{flex:1}
+}
+
+@media (min-width:1000px){
+  .wrap{max-width:1140px;padding:0 48px}
+  .narrow .wrap{max-width:860px}
+  .picks{display:grid;grid-template-columns:1fr 1fr;column-gap:64px}
+  .pick:nth-child(2){border-top:1px solid var(--track)}
+  .pick{display:flex;flex-direction:column;justify-content:flex-end}
+  .games{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+  .league{display:grid;grid-template-columns:minmax(300px,auto) 1fr;grid-template-areas:"name name" "big lines" "label lines";column-gap:72px;align-items:start}
+  .league-name{grid-area:name}
+  .league .big{grid-area:big}
+  .league .big-label{grid-area:label}
+  .league .lines{grid-area:lines;margin-top:10px}
+  .league .empty{grid-column:1 / 3}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fill{animation:none}
+  *{scroll-behavior:auto}
+}
