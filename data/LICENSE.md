@@ -4,6 +4,6 @@ The picks, results and grades in these files are published by The Counter (https
 
 You may share and adapt them for any purpose, including commercial use, as long as you give credit to The Counter, link the license, and say what you changed.
 
-Game results are facts. Scores and schedules: nflverse (https://github.com/nflverse), CC BY 4.0.
+Game results are facts. NFL scores and schedules: nflverse (https://github.com/nflverse), CC BY 4.0.
 
 The files hold no betting market data.

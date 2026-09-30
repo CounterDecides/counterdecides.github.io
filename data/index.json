@@ -1,5 +1,5 @@
 {
- "as_of": null,
+ "as_of": "2026-09-29T21:00:46-04:00",
  "license": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
@@ -34,5 +34,25 @@
   "sealed_post",
   "graded_post"
  ],
- "leagues": {}
+ "leagues": {
+  "nfl": {
+   "name": "NFL",
+   "seasons": {
+    "2026": {
+     "csv": "data/nfl/2026.csv",
+     "json": "data/nfl/2026.json",
+     "weeks": {
+      "4": {
+       "csv": "data/nfl/2026_wk04.csv",
+       "json": "data/nfl/2026_wk04.json"
+      }
+     }
+    }
+   },
+   "latest": {
+    "csv": "data/nfl/latest.csv",
+    "json": "data/nfl/latest.json"
+   }
+  }
+ }
 }
