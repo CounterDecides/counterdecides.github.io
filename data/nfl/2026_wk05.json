@@ -38,6 +38,20 @@
   "sealed_post",
   "graded_post"
  ],
+ "seal_hash": "f1c025d1cffb43648dc39bfd7ff3ed869338bcf510a9b3910f62274a8f1de457",
+ "summary": {
+  "calls": 15,
+  "graded": 0,
+  "called": 0,
+  "ties": 0,
+  "void": 0,
+  "postponed": 0,
+  "pending": 15,
+  "not_forecast": 0,
+  "one_source": 0,
+  "brier": null,
+  "log_loss": null
+ },
  "games": [
   {
    "league": "nfl",
